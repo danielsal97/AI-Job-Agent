@@ -42,7 +42,7 @@ AI_Job_Agent/
 
 Clone the project repository and navigate to the project directory:
 
-``
+```sh
 git clone https://github.com/your-repo-name.git
 cd AI_Job_Agent
 ```
@@ -56,23 +56,23 @@ cd AI_Job_Agent
 
 1. Create and activate a virtual environment:
 
-		```
-		python -m venv venv
-		source venv/bin/activate  # For Linux/macOS
-		venv\Scripts\activate  # For Windows
-		```
+	```sh
+	python -m venv venv
+	source venv/bin/activate  # For Linux/macOS
+	venv\Scripts\activate  # For Windows
+	```
 
 2. Install dependencies:
 
-		```
-		pip install -r requirements.txt
-		```
+	```sh
+	pip install -r requirements.txt
+	```
 
 #### Option 2: Using Installer Script
 
 Run the `installer.py` script to install all dependencies:
 
-```
+```sh
 python installer.py
 ```
 
@@ -81,14 +81,14 @@ python installer.py
 1. Suppress Tokenizer Warnings:
 		Add this environment variable to suppress tokenizers’ parallelism warnings:
 
-		```
+		```sh
 		export TOKENIZERS_PARALLELISM=false
 		```
 
 2. Set Resume Path:
 		Open the `main.py` file and set the path to your resume file:
 
-		```
+		```python
 		resume_path = 'Daniel_Salame_CV.txt'
 		```
 
@@ -96,9 +96,9 @@ python installer.py
 
 1. Execute the `main.py` file to start the process:
 
-		```
-		python main.py
-		```
+	```sh
+	python main.py
+	```
 
 2. The script will:
 		- Scrape job postings using CSS selectors.
