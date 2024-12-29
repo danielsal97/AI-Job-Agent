@@ -1,25 +1,23 @@
-
-
-AI Job Agent
+# AI Job Agent
 
 This project is a Python-based tool that matches job descriptions with resumes by calculating similarity scores using embeddings and natural language processing techniques. It includes functionalities for scraping job postings, generating embeddings, and evaluating similarity metrics to provide insights into how well a resume aligns with job opportunities.
 
-Features
-	•	Job Scraping:
-	•	Uses CSS selectors to scrape job listings from websites like NVIDIA.
-	•	Extracts job titles, descriptions, and other relevant details.
-	•	Resume Processing:
-	•	Processes resumes for embedding generation using SentenceTransformer models.
-	•	Job Processing:
-	•	Generates embeddings for job descriptions and compares them with the resume.
-	•	Similarity Scoring:
-	•	Calculates similarity scores using cosine similarity and dot product.
-	•	Provides metrics such as Job-to-Resume Match, Resume-to-Job Match, Semantic Match, Contextual Match, and Overall Score.
+## Features
+- **Job Scraping:**
+  - Uses CSS selectors to scrape job listings from websites like NVIDIA.
+  - Extracts job titles, descriptions, and other relevant details.
+- **Resume Processing:**
+  - Processes resumes for embedding generation using SentenceTransformer models.
+- **Job Processing:**
+  - Generates embeddings for job descriptions and compares them with the resume.
+- **Similarity Scoring:**
+  - Calculates similarity scores using cosine similarity and dot product.
+  - Provides metrics such as Job-to-Resume Match, Resume-to-Job Match, Semantic Match, Contextual Match, and Overall Score.
 
-Project File Structure
+## Project File Structure
 
 AI_Job_Agent/
-├── __pycache__/                # Auto-generated Python cache files
+├── pycache/                # Auto-generated Python cache files
 ├── venv/                       # Virtual environment (not included in version control)
 ├── .gitignore                  # Git configuration to ignore specific files
 ├── config.py                   # Configuration for settings (e.g., selectors, paths)
@@ -33,22 +31,24 @@ AI_Job_Agent/
 ├── README.MD                   # Documentation for the project
 ├── requirements.txt            # Dependencies required for the project
 
-Setup Instructions
+## Setup Instructions
 
-Prerequisites
-	1.	Install Python 3.7 or higher.
-	2.	Install required dependencies using one of the following methods:
+### Prerequisites
+1. Install Python 3.7 or higher.
+2. Install required dependencies using one of the following methods:
 
-Option 1: Using Virtual Environment
-	1.	Create and activate a virtual environment:
-
-python -m venv venv
-source venv/bin/activate  # For Linux/macOS
-venv\Scripts\activate  # For Windows
+#### Option 1: Using Virtual Environment
+1. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # For Linux/macOS
+   venv\Scripts\activate  # For Windows
 
 	2.	Install dependencies:
 
 pip install -r requirements.txt
+
+
 
 Option 2: Using Installer Script
 
@@ -64,12 +64,15 @@ git clone https://github.com/danielsal97/AI-Job-Agent.git
 cd AI_Job_Agent
 
 Environment Configuration
-	1.	Suppress Tokenizer Warnings:
+
+1. Suppress Tokenizer Warnings
+
 Add this environment variable to suppress tokenizers’ parallelism warnings:
 
 export TOKENIZERS_PARALLELISM=false
 
-	2.	Set Resume Path:
+2. Set Resume Path
+
 Open the main.py file and set the path to your resume file:
 
 resume_path = 'Daniel_Salame_CV.txt'
@@ -78,6 +81,7 @@ Run the Project
 	1.	Run the main.py file to start the process:
 
 python main.py
+
 
 	2.	The script will:
 	•	Scrape job postings using CSS selectors.
@@ -151,3 +155,4 @@ Future Improvements
 
 Contributors
 	•	Daniel Salame: Developer and maintainer of the project.
+
