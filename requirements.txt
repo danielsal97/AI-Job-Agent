@@ -1,6 +1,0 @@
-sentence-transformers
-torch
-transformers
-selenium
-beautifulsoup4
-requests
