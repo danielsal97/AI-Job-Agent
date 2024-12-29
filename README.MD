@@ -1,48 +1,51 @@
-# AI Job Agent
++++
+
+AI Job Agent
 
 This project is a Python-based tool that matches job descriptions with resumes by calculating similarity scores using embeddings and natural language processing techniques. It includes functionalities for scraping job postings, generating embeddings, and evaluating similarity metrics to provide insights into how well a resume aligns with job opportunities.
 
-## Features
-- **Job Scraping:**
-  - Uses CSS selectors to scrape job listings from websites like NVIDIA.
-  - Extracts job titles, descriptions, and other relevant details.
-- **Resume Processing:**
-  - Processes resumes for embedding generation using SentenceTransformer models.
-- **Job Processing:**
-  - Generates embeddings for job descriptions and compares them with the resume.
-- **Similarity Scoring:**
-  - Calculates similarity scores using cosine similarity and dot product.
-  - Provides metrics such as Job-to-Resume Match, Resume-to-Job Match, Semantic Match, Contextual Match, and Overall Score.
+Features
+	•	Job Scraping:
+	•	Uses CSS selectors to scrape job listings from websites like NVIDIA.
+	•	Extracts job titles, descriptions, and other relevant details.
+	•	Resume Processing:
+	•	Processes resumes for embedding generation using SentenceTransformer models.
+	•	Job Processing:
+	•	Generates embeddings for job descriptions and compares them with the resume.
+	•	Similarity Scoring:
+	•	Calculates similarity scores using cosine similarity and dot product.
+	•	Provides metrics such as Job-to-Resume Match, Resume-to-Job Match, Semantic Match, Contextual Match, and Overall Score.
 
-## Project File Structure
+Project File Structure
 
 AI_Job_Agent/
 ├── pycache/                # Auto-generated Python cache files
-├── venv/                       # Virtual environment (not included in version control)
-├── .gitignore                  # Git configuration to ignore specific files
-├── config.py                   # Configuration for settings (e.g., selectors, paths)
-├── CV_processing.py            # Resume processing and embedding generation
-├── Daniel_Salame_CV.txt        # Sample resume file
-├── hybrid_job_scraper.py       # Hybrid job scraper implementation
-├── installer.py                # Installer script for dependencies
-├── Job_processign.py           # Job posting processing and embedding generation
-├── job_scraper_context.py      # Handles context and orchestration for job scraping
-├── main.py                     # Entry point for running the application
-├── README.MD                   # Documentation for the project
-├── requirements.txt            # Dependencies required for the project
+├── venv/                   # Virtual environment (not included in version control)
+├── .gitignore              # Git configuration to ignore specific files
+├── config.py               # Configuration for settings (e.g., selectors, paths)
+├── CV_processing.py        # Resume processing and embedding generation
+├── Daniel_Salame_CV.txt    # Sample resume file
+├── hybrid_job_scraper.py   # Hybrid job scraper implementation
+├── installer.py            # Installer script for dependencies
+├── Job_processign.py       # Job posting processing and embedding generation
+├── job_scraper_context.py  # Handles context and orchestration for job scraping
+├── main.py                 # Entry point for running the application
+├── README.MD               # Documentation for the project
+├── requirements.txt        # Dependencies required for the project
 
-## Setup Instructions
+Setup Instructions
 
-### Prerequisites
-1. Install Python 3.7 or higher.
-2. Install required dependencies using one of the following methods:
+Prerequisites
+	1.	Install Python 3.7 or higher.
+	2.	Install required dependencies using one of the following methods:
 
-#### Option 1: Using Virtual Environment
-1. Create and activate a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # For Linux/macOS
-   venv\Scripts\activate  # For Windows
+Option 1: Using Virtual Environment
+	1.	Create and activate a virtual environment:
+
+python -m venv venv
+source venv/bin/activate  # For Linux/macOS
+venv\Scripts\activate     # For Windows
+
 
 	2.	Install dependencies:
 
@@ -64,18 +67,17 @@ git clone https://github.com/danielsal97/AI-Job-Agent.git
 cd AI_Job_Agent
 
 Environment Configuration
-
-1. Suppress Tokenizer Warnings
-
-Add this environment variable to suppress tokenizers’ parallelism warnings:
+	1.	Suppress Tokenizer Warnings:
 
 export TOKENIZERS_PARALLELISM=false
 
-2. Set Resume Path
 
+	2.	Set Resume Path:
 Open the main.py file and set the path to your resume file:
 
 resume_path = 'Daniel_Salame_CV.txt'
+
+
 
 Run the Project
 	1.	Run the main.py file to start the process:
@@ -111,28 +113,18 @@ websites = {
 Code Structure
 
 Main Files
-	•	main.py:
-The entry point for running the project. Loads the resume, scrapes job postings, and calculates similarity scores.
-	•	config.py:
-Stores configuration settings like CSS selectors for job scraping.
-	•	hybrid_job_scraper.py:
-Contains the hybrid implementation for scraping job postings.
-	•	job_scraper_context.py:
-Manages the context and orchestration for job scraping.
-	•	CV_processing.py:
-Handles resume processing and embedding generation.
-	•	Job_processign.py:
-Handles job description processing and embedding generation.
-	•	installer.py:
-Script to automate dependency installation.
+	•	main.py: Entry point for running the project. Loads the resume, scrapes job postings, and calculates similarity scores.
+	•	config.py: Stores configuration settings like CSS selectors for job scraping.
+	•	hybrid_job_scraper.py: Contains the hybrid implementation for scraping job postings.
+	•	job_scraper_context.py: Manages the context and orchestration for job scraping.
+	•	CV_processing.py: Handles resume processing and embedding generation.
+	•	Job_processign.py: Handles job description processing and embedding generation.
+	•	installer.py: Script to automate dependency installation.
 
 Supporting Files
-	•	Daniel_Salame_CV.txt:
-Example resume for testing.
-	•	requirements.txt:
-List of required Python libraries.
-	•	README.MD:
-Detailed documentation for the project.
+	•	Daniel_Salame_CV.txt: Example resume for testing.
+	•	requirements.txt: List of required Python libraries.
+	•	README.MD: Detailed documentation for the project.
 
 Sample Output
 
@@ -155,4 +147,4 @@ Future Improvements
 
 Contributors
 	•	Daniel Salame: Developer and maintainer of the project.
-
++++
