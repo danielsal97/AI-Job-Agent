@@ -15,6 +15,7 @@ This project is a Python-based tool designed to match job descriptions with resu
 	- Calculates similarity scores using cosine similarity and dot product.
 	- Provides metrics such as Job-to-Resume Match, Resume-to-Job Match, Semantic Match, Contextual Match, and Overall Score.
 
+<<<<<<< HEAD
 ## Project File Structure
 
 An overview of the project files is as follows:
@@ -35,6 +36,8 @@ AI_Job_Agent/
 ├── README.MD                   # Documentation for the project
 ├── requirements.txt            # Dependencies required for the project
 ```
+=======
+>>>>>>> 99e916b (Save current changes before rebase)
 
 ## Setup Instructions
 
@@ -127,6 +130,7 @@ websites_css_selectors = {
 }
 ```
 
+<<<<<<< HEAD
 ## Code Structure
 
 ### Main Files
@@ -158,6 +162,11 @@ websites_css_selectors = {
 
 ## Sample Output
 
+=======
+
+## Sample Output
+
+>>>>>>> 99e916b (Save current changes before rebase)
 ```
 ==================================================
 Job Title: Software Engineer - AI
