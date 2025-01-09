@@ -10,5 +10,4 @@ __pycache__/
 .DS_Store
 
 # Sensitive files
-config.py
 .env

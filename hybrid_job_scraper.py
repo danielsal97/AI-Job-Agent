@@ -1,3 +1,5 @@
+import hashlib
+import psycopg2
 from urllib.parse import urljoin
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -11,14 +13,78 @@ from bs4 import BeautifulSoup
 import time
 import requests
 
+DATABASE = {
+    'dbname': 'jobs_db',
+    'user': 'danielsa',
+    'password': '',  # Add your PostgreSQL password if needed
+    'host': 'localhost',
+    'port': 5432
+}
 
 class HybridJobScraper:
-    def __init__(self, selectors, base_url):
+    def __init__(self, selectors, base_url, db_config=DATABASE):
         """
-        Initialize the scraper with website-specific selectors and base URL.
+        Initialize the scraper with website-specific selectors, base URL, and database config.
         """
         self.selectors = selectors
         self.base_url = base_url
+        self.db_config = db_config  # Pass database connection info
+
+    def generate_uuid(self, job_id, job_title, company, link):
+        """
+        Generate a unique UUID based on job_id, job_title, company, and link.
+        """
+        unique_string = f"{job_id}_{job_title}_{company}_{link}"
+        return hashlib.md5(unique_string.encode()).hexdigest()
+
+    def check_job_exists(self, job_link):
+        """
+        Check if the job with the given job_link exists in the database.
+        Return `True` if the job exists, otherwise return `False`.
+        """
+        query = "SELECT 1 FROM jobs WHERE link = %s;"
+        try:
+            conn = psycopg2.connect(**self.db_config)
+            cursor = conn.cursor()
+            cursor.execute(query, (job_link,))
+            result = cursor.fetchone()
+            cursor.close()
+            conn.close()
+            return result is not None  # Job exists if result is not None
+        except Exception as e:
+            print(f"Database error while checking job existence: {e}")
+            return False
+
+    def insert_job_to_db(self, job_id, company, title, description, link, location):
+        """Insert job into the database if it doesn't exist."""
+        if self.check_job_exists(link):
+            print(f"Job with link {link} already exists. Skipping.")
+            return
+
+        # Ensure job_id is unique by generating a UUID if it's missing or "Unknown"
+        if not job_id or job_id.strip() == "" or job_id == "Unknown":
+            job_id = self.generate_uuid(job_id, title, company, link)
+
+        # Default company if it is None or empty
+        if not company or company.strip() == "":
+            company = "Unknown"
+
+        query = """
+        INSERT INTO jobs (job_id, company, title, description, link, location)
+        VALUES (%s, %s, %s, %s, %s, %s)
+        ON CONFLICT (job_id, company, link) DO NOTHING;  -- Prevent duplicate entries
+        """
+        try:
+            conn = psycopg2.connect(**self.db_config)
+            cursor = conn.cursor()
+            cursor.execute(query, (job_id, company, title, description, link, location))
+            conn.commit()
+            print(f"Job '{title}' added to the database successfully!")
+        except Exception as e:
+            print(f"Error inserting job into database: {e}")
+        finally:
+            cursor.close()
+            conn.close()
 
     def fetch_with_requests(self, url):
         """
@@ -119,8 +185,18 @@ class HybridJobScraper:
 
         # Visit each job link to extract detailed information
         for job in jobs:
+            uuid = self.generate_uuid(job.get("id", ""), job["title"], self.base_url, job["link"])
+
+            # Check if the job already exists in the database
+            if self.check_job_exists(job["link"]):
+                print(f"Skipping job: {job['title']}. Already exists in the database.")
+                continue
+
             job_details = self.extract_job_details(driver, wait, job["link"])
             detailed_jobs.append(job_details)
+
+            # Insert job into the database
+            self.insert_job_to_db(job.get("id", ""), job.get("company", "Unknown"), job["title"], job_details["description"], job["link"], job_details["location"])
 
         return detailed_jobs
 

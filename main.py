@@ -5,15 +5,15 @@ from Job_processign import calculate_scores
 from hybrid_job_scraper import HybridJobScraper
 from job_scraper_context import JobScraperContext
 from config import websites
-
+from filttering_url import get_filter_url
 # Suppress tokenizers parallelism warning
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 
 def main():
     # Load the resume
-    resume_path = 'Daniel_Salame_CV.txt'
-    resume_text = load_resume(resume_path)
+    resume_file_path = 'Daniel_Salame_CV.txt'
+    resume_text = load_resume(resume_file_path)
 
     # Load embedding model
     embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -22,9 +22,13 @@ def main():
     # Scrape and process jobs
     for website_name, config in websites.items():
         print(f"Scraping jobs from {website_name}...")
-        scraper = HybridJobScraper(config["selectors"], config["url"])
+        newurl = get_filter_url(config["url"], config["filters"])
+        if newurl == None:
+            print("Invalid filtter selected. Skipping website.")
+            continue
+        scraper = HybridJobScraper(config["selectors"], newurl)
         context = JobScraperContext(scraper)
-        jobs = context.scrape_jobs(config["url"], use_requests=False)  # Change to True for Requests
+        jobs = context.scrape_jobs(newurl, use_requests=False)  # Change to True for Requests
         print(f"Scraped {len(jobs)} jobs from {website_name}.\n")
 
         # Process each job
@@ -51,6 +55,9 @@ def main():
             print(f"Description: {job_description}")
             print(f"Job Link: {job_link}")
             print("=" * 50)
+
+            # Insert job into the database if not exists
+            scraper.insert_job_to_db(job.get("id", ""), job.get("company", "Unknown"), job_title, job_description, job_link, job.get("location", "Unknown"))
 
 if __name__ == "__main__":
     main()
