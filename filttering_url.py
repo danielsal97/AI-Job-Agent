@@ -1,10 +1,11 @@
+import re
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from user_interface import display_options, get_user_choices
 
-# Function to scrape filter mapping
 def get_filter_mapping(driver, filter_button_selector, dropdown_selector):
     """
     Extracts filter options and their IDs from the dropdown triggered by a filter button.
@@ -32,6 +33,7 @@ def get_filter_mapping(driver, filter_button_selector, dropdown_selector):
     filter_mapping = {}
     for label in filter_labels:
         full_filter_name = label.text.strip()  # Full filter name
+        full_filter_name = re.sub(r'\s*\(\d+\)$', '', full_filter_name)  # Remove count in parentheses
         filter_id = label.get("for")  # The `for` attribute contains the unique filter ID
         
         if full_filter_name and filter_id:
@@ -39,7 +41,6 @@ def get_filter_mapping(driver, filter_button_selector, dropdown_selector):
 
     return filter_mapping
 
-# Function to get the filter URL with multiple filters
 def get_filter_url(base_url, filters):
     """
     Generates a new URL based on multiple selected filters and values.
@@ -51,22 +52,24 @@ def get_filter_url(base_url, filters):
     selected_filters = {}
 
     while True:
-        # Display available filters to the user
-        print("\nAvailable Filters:")
-        for key in filters.keys():
-            print(f"- {key}")
+        # Display filter options
+        display_options(filters.keys(), "Available Filters", allow_back=True)
 
-        # Ask user to select a filter key or type "done" to finish
-        filter_key = input("Enter the filter key (or type 'done' to finish): ").strip()
-        if filter_key.lower() == 'done':
+        # Get user choice (single selection expected)
+        selected_filter = get_user_choices(filters.keys(), "filter", multiple=False, allow_back=True)
+        if selected_filter == "back":
+            print("Returning to the previous menu.")
             break
 
-        if filter_key not in filters:
-            print("Invalid filter key selected.")
+        if not selected_filter:
+            print("No valid filter selected. Please try again.")
             continue
 
+        # `get_user_choices` returns a list, take the first element
+        selected_filter = selected_filter[0]
+
         # Get the selected filter's configuration
-        filter_config = filters[filter_key]
+        filter_config = filters[selected_filter]
 
         # Scrape the filter options
         filter_mapping = get_filter_mapping(
@@ -75,20 +78,20 @@ def get_filter_url(base_url, filters):
             dropdown_selector=filter_config["dropdown_selector"],
         )
 
-        # Display the extracted options for the selected filter
-        print(f"\nExtracted {filter_key} Options:")
-        for name, filter_id in filter_mapping.items():
-            print(f"{name}: {filter_id}")
+        # Display extracted filter options
+        display_options(filter_mapping.keys(), f"Extracted {selected_filter} Options", allow_back=True)
 
-        # Ask user to choose multiple options for the filter
-        chosen_filters = input(f"Choose one or more {filter_key} options ('+'-separated): ").strip().split('+')
+        # Get user choices for the selected filter
+        chosen_filters = get_user_choices(filter_mapping.keys(), "option", multiple=True, allow_back=True)
+        if chosen_filters == "back":
+            print("Returning to filter selection.")
+            continue
+        if not chosen_filters:
+            print(f"No valid {selected_filter} options selected. Skipping.")
+            continue
 
         for chosen_filter in chosen_filters:
-            chosen_filter = chosen_filter.strip()
-            if chosen_filter in filter_mapping:
-                selected_filters.setdefault(filter_config["query_key"], []).append(filter_mapping[chosen_filter])
-            else:
-                print(f"Invalid {filter_key} option: {chosen_filter}")
+            selected_filters.setdefault(filter_config["query_key"], []).append(filter_mapping[chosen_filter])
 
     # Generate the final URL with all selected filters
     query_parts = []
@@ -100,27 +103,3 @@ def get_filter_url(base_url, filters):
     print(f"\nGenerated URL: {new_url}")
     driver.quit()
     return new_url
-
-
-# Example usage
-filters = {
-    "Job Type": {
-        "filter_button_selector": "button[data-automation-id='JobTypeFilter']",
-        "dropdown_selector": "fieldset[data-automation-id='JobType-checkboxgroup'] div.ReactVirtualized__Grid__innerScrollContainer",
-        "query_key": "job_type"
-    },
-    "Job Family": {
-        "filter_button_selector": "button[data-automation-id='JobFamilyFilter']",
-        "dropdown_selector": "fieldset[data-automation-id='jobFamilyGroupCheckboxGroup'] div.ReactVirtualized__Grid__innerScrollContainer",
-        "query_key": "job_family"
-    }
-}
-
-# # Base URL for the job site
-# base_url = "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite"
-
-# # Generate a URL for the selected filters
-# new_url = get_filter_url(base_url, filters)
-
-# if new_url:
-#     print(f"\nFinal URL: {new_url}")

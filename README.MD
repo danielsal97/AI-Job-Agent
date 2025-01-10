@@ -15,29 +15,6 @@ This project is a Python-based tool designed to match job descriptions with resu
 	- Calculates similarity scores using cosine similarity and dot product.
 	- Provides metrics such as Job-to-Resume Match, Resume-to-Job Match, Semantic Match, Contextual Match, and Overall Score.
 
-<<<<<<< HEAD
-## Project File Structure
-
-An overview of the project files is as follows:
-
-```
-AI_Job_Agent/
-├── __pycache__/                # Auto-generated Python cache files
-├── venv/                       # Virtual environment (not included in version control)
-├── .gitignore                  # Git configuration to ignore specific files
-├── config.py                   # Configuration for settings (e.g., selectors, paths)
-├── CV_processing.py            # Resume processing and embedding generation
-├── Daniel_Salame_CV.txt        # Sample resume file
-├── hybrid_job_scraper.py       # Hybrid job scraper implementation
-├── installer.py                # Installer script for dependencies
-├── Job_processign.py           # Job posting processing and embedding generation
-├── job_scraper_context.py      # Handles context and orchestration for job scraping
-├── main.py                     # Entry point for running the application
-├── README.MD                   # Documentation for the project
-├── requirements.txt            # Dependencies required for the project
-```
-=======
->>>>>>> 99e916b (Save current changes before rebase)
 
 ## Setup Instructions
 
@@ -130,43 +107,9 @@ websites_css_selectors = {
 }
 ```
 
-<<<<<<< HEAD
-## Code Structure
-
-### Main Files
-
-- **main.py:**
-	- The entry point for running the project.
-	- Loads the resume, scrapes job postings, and calculates similarity scores.
-- **config.py:**
-	- Stores configuration settings like CSS selectors for job scraping.
-- **hybrid_job_scraper.py:**
-	- Contains the hybrid implementation for scraping job postings.
-- **job_scraper_context.py:**
-	- Manages the context and orchestration for job scraping.
-- **CV_processing.py:**
-	- Handles resume processing and embedding generation.
-- **Job_processign.py:**
-	- Handles job description processing and embedding generation.
-- **installer.py:**
-	- Script to automate dependency installation.
-
-### Supporting Files
-
-- **Daniel_Salame_CV.txt:**
-	- Example resume for testing.
-- **requirements.txt:**
-	- List of required Python libraries.
-- **README.MD:**
-	- Detailed documentation for the project.
 
 ## Sample Output
 
-=======
-
-## Sample Output
-
->>>>>>> 99e916b (Save current changes before rebase)
 ```
 ==================================================
 Job Title: Software Engineer - AI
