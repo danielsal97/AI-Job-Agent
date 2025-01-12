@@ -15,7 +15,11 @@ websites = {
             "Location": {
                 "filter_button_selector": "button[data-automation-id='distanceLocation']",
                 "dropdown_selector": "div[aria-label='grid']", 
-                "query_key": "locationHierarchy1" or "locationHierarchy2" or "locations"
+                "fieldset_query_keys": {
+                    "fieldset[data-automation-id='Location Type-container']": "locationHierarchy2",
+                    "fieldset[data-automation-id='Locations-container']": "locationHierarchy1",
+                    "fieldset[data-automation-id='Sites-container']": "locations"
+        },
             },
             "Time Type": {
                 "filter_button_selector": "button[data-automation-id='employmentType']",
