@@ -1,12 +1,20 @@
 import os
-from user_interface import display_options, get_user_choices
-from process import show_data, run_scraping
-from config import websites
-
+import sys
+from ui.user_interface import display_options, get_user_choices
+from core.process import show_data, run_scraping
+from configuration.config import websites
+sys.path.append(os.path.join(os.path.dirname(__file__), 'core'))
 # Suppress tokenizers parallelism warning
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 def main():
+    """TODO: Implement the main function
+        1. fix bugs with go back -> when im scarping can make an errors with sellenium -> going to differnet page 
+        2. scrping dyinmacly with scrolling down
+        3. add more websites
+        4. use asincio for scrapping ( websites and jobs)
+        5. improve runtime
+    """
     while True:
         # Top-Level Options
         main_menu_options = ["Show jobs in database", "Run job scraping"]

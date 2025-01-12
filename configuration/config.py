@@ -34,17 +34,7 @@ websites = {
             }
         }
     },
-    # "nvidia": {
-    #     "url": "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite?locationHierarchy1=2fcb99c455831013ea52bbe14cf9326c",
-    #     "job_card": "li.css-1q2dra3",
-    #     "job_title": "h3 a[data-automation-id='jobTitle']",
-    #     "job_title_detail": "h2[data-automation-id='jobPostingHeader']",
-    #     "job_location": "div[data-automation-id='locations']",
-    #     "job_date": "div[data-automation-id='postedOn']",
-    #     "job_description": "div[data-automation-id='jobPostingDescription']",
-    #     "next_button": "//button[@aria-label='next']",
-    #     "next_button": "button.css-znjvqu[aria-label='next']"   
-    #       },
+
 
         # "apple": {
         #     "url": "https://jobs.apple.com/en-il/search?location=israel-ISR",
@@ -54,20 +44,44 @@ websites = {
         #     "job_location": "span[itemprop='addressRegion']",
         #     "job_date": "time#jobPostDate",
         #     "job_description": "div[itemprop='description']",
-        #     ##"job_description": "div#jd-description span",
         #     "next_button": "li.pagination__next a"
-        #     ##"next_button": "span.next[aria-hidden='true']",
         # },
 
-    # "apple": {
-    #     "url": "https://jobs.apple.com/en-il/search?sort=relevance&key=graduate&location=israel-ISR",
-    #     "job_card": "tbody[id^='accordion_PIPE']",
-    #     "job_title": "tbody[id^='accordion_PIPE'] a.table--advanced-search__title",
-    #     "job_title_detail": "h1.jd__header--title",
-    #     "job_location": "span[itemprop='addressRegion']",
-    #     "job_date": "time#jobPostDate",
-    #     "job_description": "div[itemprop='description']",
-    #     "next_button": "li.pagination__next a[aria-disabled='false']"}
+    "apple": {
+        "url": "https://jobs.apple.com/en-il/search?sort=relevance&key=graduate&location=israel-ISR",
+        "selectors": {
+        "job_card": "tbody[id^='accordion_PIPE']",
+        "job_title": "tbody[id^='accordion_PIPE'] a.table--advanced-search__title",
+        "job_title_detail": "h1.jd__header--title",
+        "job_location": "span[itemprop='addressRegion']",
+        "job_date": "time#jobPostDate",
+        "job_description": "div[itemprop='description']",
+        "next_button": "li.pagination__next a[aria-disabled='false']",
+        "next_button_type": "link"
+        },
+        "filters": {
+            "Location": {
+                "filter_button_selector": "#locations-filter-acc",
+                "dropdown_selector": "fieldset.selected-filters-section ul.auto-suggest-list",
+                "query_key": ["location"]
+            },
+            # "Time Type": {
+            #     "filter_button_selector": "button[data-automation-id='employmentType']",
+            #     "dropdown_selector": "fieldset[data-automation-id='employmentTypeCheckboxGroup'] div.ReactVirtualized__Grid__innerScrollContainer", 
+            #     "query_key": "timeType"
+            # },
+            # "Job Category": {
+            #     "filter_button_selector": "button[data-automation-id='jobFamilyGroup']",
+            #     "dropdown_selector": "fieldset[data-automation-id='jobFamilyGroupCheckboxGroup'] div.ReactVirtualized__Grid__innerScrollContainer",  # Adjusted to match the provided HTML
+            #     "query_key": "jobFamilyGroup"
+            # },
+            # "More": {
+            #     "filter_button_selector": "button[data-automation-id='more']",
+            #     "dropdown_selector": "fieldset[data-automation-id='Job Type-checkboxgroup'] div.ReactVirtualized__Grid__innerScrollContainer", 
+            #     "query_key": "workerSubType" 
+            # }
+        }
+    },
 
     # "alljobs": {
     #     "url": "https://www.alljobs.co.il/SearchResultsGuest.aspx?page=1&position=&type=&city=&region=",

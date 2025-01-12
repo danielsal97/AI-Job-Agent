@@ -1,12 +1,14 @@
 import os
 from sentence_transformers import SentenceTransformer
-from CV_processing import load_resume, generate_embedding
-from Job_processign import calculate_scores
-from hybrid_job_scraper import HybridJobScraper
-from job_scraper_context import JobScraperContext
-from filttering_url import get_filter_url
-from show_data import display_all_jobs
-from config import websites
+from core.CV_processing import load_resume, generate_embedding
+from core.Job_processign import calculate_scores
+from core.hybrid_job_scraper import HybridJobScraper
+from core.job_scraper_context import JobScraperContext
+from core.filttering_url import get_filter_url
+from DB.show_data import display_all_jobs
+from configuration.config import websites
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), 'core'))
 # Suppress tokenizers parallelism warning
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
@@ -21,7 +23,7 @@ def run_scraping(selected_websites):
     Scrape jobs from the selected websites and process them.
     """
     # Load the resume
-    resume_file_path = 'Daniel_Salame_CV.txt'
+    resume_file_path = 'core/Daniel_Salame_CV.txt'
     resume_text = load_resume(resume_file_path)
 
     # Load embedding model

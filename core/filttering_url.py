@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from user_interface import display_options, get_user_choices
+from ui.user_interface import display_options, get_user_choices
 
 def get_filter_mapping(driver, filter_button_selector, dropdown_selector):
     """
