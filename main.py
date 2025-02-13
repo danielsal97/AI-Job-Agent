@@ -9,11 +9,18 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 def main():
     """TODO: Implement the main function
-        1. fix bugs with go back -> when im scarping can make an errors with sellenium -> going to differnet page 
-        2. scrping dyinmacly with scrolling down
+        Tomorow:
+        1. go over the code and understand it
+        2. add comments
+        3. create full ReadMe well explained and to see that i understand it well
+
+        
+        Future improvements:
+        1. "go back" option: need to see if its undo for going to prev page at menu also split it from preforme action
         3. add more websites
         4. use asincio for scrapping ( websites and jobs)
-        5. improve runtime
+        5. adding logging
+        6. change "While True" for better control
     """
     while True:
         # Top-Level Options

@@ -2,7 +2,7 @@ import os
 from sentence_transformers import SentenceTransformer
 from core.CV_processing import load_resume, generate_embedding
 from core.Job_processign import calculate_scores
-from core.hybrid_job_scraper import HybridJobScraper
+from core.hybrid_job_scraper import HybridPageScraper
 from core.job_scraper_context import JobScraperContext
 from core.filttering_url import get_filter_url
 from DB.show_data import display_all_jobs
@@ -38,7 +38,7 @@ def run_scraping(selected_websites):
             print("Invalid filter selected. Skipping website.")
             continue
 
-        scraper = HybridJobScraper(config["selectors"], newurl)
+        scraper = HybridPageScraper(config["selectors"], newurl)
         context = JobScraperContext(scraper)
         jobs = context.scrape_jobs(newurl, use_requests=False)  # Change to True for Requests
         print(f"Scraped {len(jobs)} jobs from {website_name}.\n")

@@ -21,7 +21,7 @@ DATABASE = {
     'port': 5432
 }
 
-class HybridJobScraper:
+class HybridPageScraper:
     def __init__(self, selectors, base_url, db_config=DATABASE):
         """
         Initialize the scraper with website-specific selectors, base URL, and database config.

@@ -10,6 +10,7 @@ class JobScraperContext:
         """
         Scrape jobs from the provided URL using Selenium, BeautifulSoup, and Requests.
         """
+        # consider to delete this part not i use
         if use_requests:
             print("Using Requests for scraping...")
             html = self.scraper.fetch_with_requests(base_url)

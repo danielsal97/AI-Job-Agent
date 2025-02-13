@@ -1,8 +1,0 @@
-sentence-transformers
-torch
-transformers
-selenium
-beautifulsoup4
-requests
-postgresql
-psycopg2-binary
